@@ -2,10 +2,8 @@ package com.katsiro.alexey.gia.di
 
 import androidx.room.Room
 import com.katsiro.alexey.gia.data.GiaDatabase
-import com.katsiro.alexey.gia.data.repositories.CategoryRepository
-import com.katsiro.alexey.gia.data.repositories.CategoryRepositoryImpl
-import com.katsiro.alexey.gia.data.repositories.PurchaseRepository
-import com.katsiro.alexey.gia.data.repositories.PurchaseRepositoryImpl
+import com.katsiro.alexey.gia.data.repositories.*
+import com.katsiro.alexey.gia.ui.CategoryViewModel
 import com.katsiro.alexey.gia.ui.MainViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -13,8 +11,10 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-    viewModel { MainViewModel(get()) }
+    viewModel { MainViewModel(get(), get()) }
+    viewModel { CategoryViewModel(get()) }
 
+    single<LinkRepository> { LinkRepositoryImpl(get()) }
     single<PurchaseRepository> { PurchaseRepositoryImpl(get()) }
     single<CategoryRepository> { CategoryRepositoryImpl(get()) }
 

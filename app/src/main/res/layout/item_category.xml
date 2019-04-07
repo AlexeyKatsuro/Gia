@@ -3,17 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
-            type="com.katsiro.alexey.gia.data.entities.Category"/>
+            type="com.katsiro.alexey.gia.data.entities.Category" />
     </data>
 
     <TextView
         android:id="@+id/text_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="16dp"
         android:text="@{item.name}"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-        android:padding="16dp"
         tools:text="Category" />
 </layout>

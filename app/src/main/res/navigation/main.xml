@@ -9,5 +9,17 @@
         android:id="@+id/mainFragment"
         android:name="com.katsiro.alexey.gia.ui.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_main"/>
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/showCategoryFragment"
+            app:destination="@id/categoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.katsiro.alexey.gia.ui.CategoryFragment"
+        android:label="CategoryFragment" >
+        <argument
+            android:name="categoryId"
+            app:argType="long" />
+    </fragment>
 </navigation>
