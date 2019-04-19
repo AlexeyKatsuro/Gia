@@ -24,7 +24,7 @@ class CategoryFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMainBinding.inflate(inflater, container, false)
 
-        binding.add.setOnClickListener {
+        binding.buttonAdd.setOnClickListener {
             val date = Calendar.getInstance().time
         }
 

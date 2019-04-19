@@ -2,4 +2,9 @@
     <string name="app_name">Gia</string>
 
     <string name="category_store_all">Все</string>
+
+    <string name="editor_category_title_create">Содание</string>
+    <string name="editor_category_title_edit">Редактирование</string>
+    <string name="editor_category_name_hint">Название</string>
+    <string name="editor_category_parent_hint">Родительская категория</string>
 </resources>
