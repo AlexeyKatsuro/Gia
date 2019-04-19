@@ -16,11 +16,18 @@ interface CategoryRepository {
     suspend fun update(category: Category): Long
 
     suspend fun insertWithReturn(category: Category): Category
+
+    suspend fun getCount(): Int
 }
 
 class CategoryRepositoryImpl(
     private val categoryDao: CategoryDao
 ) : CategoryRepository {
+    override suspend fun getCount(): Int {
+        return withContext(Dispatchers.IO){
+            categoryDao.getCount()
+        }
+    }
 
     override suspend fun insertWithReturn(category: Category): Category {
         return withContext(Dispatchers.IO) {

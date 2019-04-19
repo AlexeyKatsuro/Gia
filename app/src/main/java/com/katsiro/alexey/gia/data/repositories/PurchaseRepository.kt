@@ -16,11 +16,19 @@ interface PurchaseRepository {
     suspend fun update(purchase: Purchase): Long
 
     suspend fun insertWithReturn(purchase: Purchase): Purchase
+
+    suspend fun getCount(): Int
 }
 
 class PurchaseRepositoryImpl(
     private val purchaseDao: PurchaseDao
 ) : PurchaseRepository {
+
+    override suspend fun getCount(): Int {
+        return withContext(Dispatchers.IO) {
+            purchaseDao.getCount()
+        }
+    }
 
     override suspend fun insertWithReturn(purchase: Purchase): Purchase {
         return withContext(Dispatchers.IO) {
@@ -51,5 +59,4 @@ class PurchaseRepositoryImpl(
             purchaseDao.getPurchase(id)
         }
     }
-
 }

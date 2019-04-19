@@ -3,34 +3,20 @@ package com.katsiro.alexey.gia.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.katsiro.alexey.gia.base.BaseViewModel
-import com.katsiro.alexey.gia.data.entities.Purchase
-import com.katsiro.alexey.gia.data.repositories.LinkRepository
+import com.katsiro.alexey.gia.data.entities.Category
+import com.katsiro.alexey.gia.data.repositories.CategoryRepository
 
 class CategoryViewModel(
-    private val linkRepository: LinkRepository
+    private val categoryRepository: CategoryRepository
 ) : BaseViewModel() {
 
+    private val _categories = MutableLiveData<List<Category>>()
+    val categories: LiveData<List<Category>>
+        get() = _categories
 
-    private val _addedPurches = MutableLiveData<Purchase>()
-    val addepPurchase: LiveData<Purchase>
-        get() = _addedPurches
-
-    private val _purcheses = MutableLiveData<List<Purchase>>()
-    val purcheses: LiveData<List<Purchase>>
-        get() = _purcheses
-
-
-    fun addLinkWithReturn(categoryId: Long, purchase: Purchase) {
-        loadData(_addedPurches) {
-            linkRepository.addLinkWithReturn(categoryId, purchase).also {
-                _purcheses.value = (_purcheses.value ?: emptyList()) + it
-            }
-        }
-    }
-
-    fun getPurchasesByCategory(categoryId: Long) {
-        loadData(_purcheses) {
-            linkRepository.getPurchasesByCategory(categoryId)
+    fun getAllCategories(){
+        loadData(_categories){
+            categoryRepository.getAllCategories()
         }
     }
 }

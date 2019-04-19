@@ -15,13 +15,22 @@
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/text_id"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:text="@{``+item.id}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            tools:text="Category" />
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/text_сategory_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@{String.valueOf(item.categoryId)}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            tools:text="1" />
+
         <TextView
             android:id="@+id/text_note"
             android:layout_width="0dp"
@@ -30,7 +39,7 @@
             android:padding="16dp"
             android:text="@{item.note}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            tools:text="Category" />
+            tools:text="Макарон" />
         <TextView
             android:id="@+id/text_date"
             android:layout_width="0dp"
@@ -39,7 +48,7 @@
             android:padding="16dp"
             android:text="@{item.formatedDate}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            tools:text="Category" />
+            tools:text="24:02" />
         <TextView
             android:id="@+id/text_cost"
             android:layout_width="0dp"
@@ -48,7 +57,7 @@
             android:padding="16dp"
             android:text="@{String.valueOf(item.cost)}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            tools:text="10.2" />
+            tools:text="10.2 р" />
     </LinearLayout>
 
 
