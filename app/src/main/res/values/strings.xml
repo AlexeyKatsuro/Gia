@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Gia</string>
+
+    <string name="category_store_all">Все</string>
 </resources>

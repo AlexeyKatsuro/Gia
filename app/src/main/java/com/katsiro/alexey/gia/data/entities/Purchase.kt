@@ -9,7 +9,8 @@ import java.util.*
 data class Purchase(
     val cost: Float,
     val date: Date,
-    val note: String = ""
+    val note: String = "",
+    val categoryId: Long
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
