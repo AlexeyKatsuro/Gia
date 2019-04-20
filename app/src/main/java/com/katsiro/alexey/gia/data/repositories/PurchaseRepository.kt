@@ -5,24 +5,12 @@ import com.katsiro.alexey.gia.data.entities.Purchase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-interface PurchaseRepository {
-
-    suspend fun getPurchase(id: Long): Purchase
-
-    suspend fun getAllPurchases(): List<Purchase>
-
-    suspend fun add(purchase: Purchase): Long
-
-    suspend fun update(purchase: Purchase): Long
-
-    suspend fun insertWithReturn(purchase: Purchase): Purchase
-
-    suspend fun getCount(): Int
-}
+interface PurchaseRepository : LocalRepository<Purchase>
 
 class PurchaseRepositoryImpl(
     private val purchaseDao: PurchaseDao
 ) : PurchaseRepository {
+
 
     override suspend fun getCount(): Int {
         return withContext(Dispatchers.IO) {
@@ -30,31 +18,31 @@ class PurchaseRepositoryImpl(
         }
     }
 
-    override suspend fun insertWithReturn(purchase: Purchase): Purchase {
+    override suspend fun delete(data: Purchase) {
         return withContext(Dispatchers.IO) {
-            purchaseDao.insertWithReplace(purchase)
+            purchaseDao.delete(data)
         }
     }
 
-    override suspend fun getAllPurchases(): List<Purchase> {
+    override suspend fun getAll(): List<Purchase> {
         return withContext(Dispatchers.IO) {
             purchaseDao.getAllPurchases()
         }
     }
 
-    override suspend fun add(purchase: Purchase): Long {
+    override suspend fun insert(data: Purchase): Long {
         return withContext(Dispatchers.IO) {
-            purchaseDao.insert(purchase)
+            purchaseDao.insert(data)
         }
     }
 
-    override suspend fun update(purchase: Purchase): Long {
+    override suspend fun update(data: Purchase) {
         return withContext(Dispatchers.IO) {
-            purchaseDao.update(purchase)
+            purchaseDao.update(data)
         }
     }
 
-    override suspend fun getPurchase(id: Long): Purchase {
+    override suspend fun get(id: Long): Purchase {
         return withContext(Dispatchers.IO) {
             purchaseDao.getPurchase(id)
         }

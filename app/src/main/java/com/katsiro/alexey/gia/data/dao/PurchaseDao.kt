@@ -19,8 +19,4 @@ abstract class PurchaseDao: BaseDao<Purchase> {
     @Query("SELECT * FROM purchase WHERE date BETWEEN :from AND :to")
     abstract fun findBetweenDates(from: Date, to: Date): List<Purchase>
 
-    @Transaction
-    open fun insertWithReplace(purchase: Purchase): Purchase {
-        return getPurchase(insert(purchase))
-    }
 }

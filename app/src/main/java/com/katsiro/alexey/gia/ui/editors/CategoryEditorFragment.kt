@@ -33,6 +33,8 @@ class CategoryEditorFragment : Fragment() {
     private val viewModel: CategoryEditorViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        category?.let { viewModel.category = it }
         binding = FragmentCategoryEditorBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
             mode = editorMode
@@ -43,10 +45,10 @@ class CategoryEditorFragment : Fragment() {
             }
 
             buttonSave.setOnClickListener {
-                val category = Category(
-                    textName.text,
-                    viewModel.category.parentId
-                )
+                val category = viewModel.category.copy(name = binding.textName.text).apply {
+                    id = viewModel.category.id
+                }
+
                 val action = when (editorMode) {
                     EditorMode.Create -> viewModel::addCategory
                     EditorMode.Edit -> viewModel::editCategory
@@ -76,7 +78,7 @@ class CategoryEditorFragment : Fragment() {
         pickViewModel.onItemClicked.observeEvent(viewLifecycleOwner) {
             when (it.requestCode) {
                 REQUEST_CATEGORY -> {
-                    val item = it as Category
+                    val item = it.item as Category
                     binding.textParent.text = item.name
                     viewModel.category.parentId = item.id
                 }

@@ -15,8 +15,4 @@ abstract class CategoryDao : BaseDao<Category>{
     @Query("SELECT * FROM category WHERE id = :id")
     abstract fun getCategory(id: Long): Category
 
-    @Transaction
-    open fun insertWithReplace(category: Category): Category {
-        return getCategory(insert(category))
-    }
 }

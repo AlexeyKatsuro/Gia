@@ -15,7 +15,7 @@ class CategoryViewModel(
         get() = _categories
 
     fun getAllCategories(){
-        load(call = {categoryRepository.getAllCategories()}){
+        load(call = {categoryRepository.getAll()}){
             _categories.value = it
         }
     }

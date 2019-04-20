@@ -5,55 +5,44 @@ import com.katsiro.alexey.gia.data.entities.Category
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-interface CategoryRepository {
-
-    suspend fun getCategory(id: Long): Category
-
-    suspend fun getAllCategories(): List<Category>
-
-    suspend fun add(category: Category): Long
-
-    suspend fun update(category: Category): Long
-
-    suspend fun insertWithReturn(category: Category): Category
-
-    suspend fun getCount(): Int
-}
+interface CategoryRepository: LocalRepository<Category>
 
 class CategoryRepositoryImpl(
     private val categoryDao: CategoryDao
 ) : CategoryRepository {
+
+
+    override suspend fun delete(data: Category) {
+       return withContext(Dispatchers.IO){
+
+       }
+    }
+
     override suspend fun getCount(): Int {
         return withContext(Dispatchers.IO){
             categoryDao.getCount()
         }
     }
 
-    override suspend fun insertWithReturn(category: Category): Category {
-        return withContext(Dispatchers.IO) {
-            categoryDao.insertWithReplace(category)
-        }
-    }
-
-    override suspend fun getAllCategories(): List<Category> {
+    override suspend fun getAll(): List<Category> {
         return withContext(Dispatchers.IO) {
             categoryDao.getAllCategories()
         }
     }
 
-    override suspend fun add(category: Category): Long {
+    override suspend fun insert(data: Category): Long {
         return withContext(Dispatchers.IO) {
-            categoryDao.insert(category)
+            categoryDao.insert(data)
         }
     }
 
-    override suspend fun update(category: Category): Long {
+    override suspend fun update(data: Category) {
         return withContext(Dispatchers.IO) {
-            categoryDao.update(category)
+            categoryDao.update(data)
         }
     }
 
-    override suspend fun getCategory(id: Long): Category {
+    override suspend fun get(id: Long): Category {
         return withContext(Dispatchers.IO) {
             categoryDao.getCategory(id)
         }

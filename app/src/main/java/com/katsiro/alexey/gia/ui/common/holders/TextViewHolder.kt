@@ -5,13 +5,8 @@ import com.afollestad.recyclical.ViewHolder
 import com.katsiro.alexey.gia.databinding.ItemTextBinding
 import com.katsiro.alexey.gia.utils.extensions.executeAfter
 
-class TextViewHolder(itemView: View) : ViewHolder(itemView) {
+class TextViewHolder(itemView: View) : BaseBindingHolder<String,ItemTextBinding>(itemView) {
 
-    val bidning: ItemTextBinding = ItemTextBinding.bind(itemView)
+    override val bidning = ItemTextBinding.bind(itemView)
 
-    fun bind(item: String) {
-        bidning.executeAfter {
-            this.item = item
-        }
-    }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.katsiro.alexey.gia.base.BaseViewModel
 import com.katsiro.alexey.gia.data.entities.Category
 import com.katsiro.alexey.gia.data.repositories.CategoryRepository
+import com.katsiro.alexey.gia.utils.extensions.trigger
 
 
 class CategoryEditorViewModel(
@@ -14,8 +15,8 @@ class CategoryEditorViewModel(
     val categories: LiveData<List<Category>>
         get() = _categories
 
-    private val _onSaveCategory = MutableLiveData<Long>()
-    val onSaveCategory: LiveData<Long>
+    private val _onSaveCategory = MutableLiveData<Unit>()
+    val onSaveCategory: LiveData<Unit>
         get() = _onSaveCategory
 
     var category: Category = Category("",1)
@@ -23,14 +24,14 @@ class CategoryEditorViewModel(
 
 
     fun getAllCategories() {
-        load( call = { categoryRepository.getAllCategories()}){
+        load( call = { categoryRepository.getAll()}){
             _categories.value = it
         }
     }
 
     fun addCategory(category: Category){
-        load(call = { categoryRepository.add(category)}){
-           _onSaveCategory.value = it
+        load(call = { categoryRepository.insert(category)}){
+           _onSaveCategory.trigger()
         }
     }
 

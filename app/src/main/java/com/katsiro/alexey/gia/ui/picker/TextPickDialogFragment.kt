@@ -16,7 +16,7 @@ import com.katsiro.alexey.gia.data.Picked
 import com.katsiro.alexey.gia.databinding.DialogPickItemBinding
 import com.katsiro.alexey.gia.ui.common.holders.TextViewHolder
 import com.katsiro.alexey.gia.utils.extensions.lazyArg
-import com.katsiro.alexey.gia.utils.extensions.withHolder
+import com.katsiro.alexey.gia.utils.extensions.withData
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.Serializable
 
@@ -62,7 +62,7 @@ class TextPickDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    val viewModel: TextPickDialogViewModel by sharedViewModel(from = { parentFragment as ViewModelStoreOwner })
+    val viewModel: TextPickDialogViewModel by sharedViewModel(from = { targetFragment as ViewModelStoreOwner })
 
     private val title: String by lazyArg {
         it.getString(ARG_TITLE)
@@ -94,12 +94,11 @@ class TextPickDialogFragment : BottomSheetDialogFragment() {
 
         binding.recyclerView.setup {
             withDataSource(dataSourceTypedOf(itemsMap.toList()))
-            withHolder<Pair<Any, String>>(R.layout.item_text) {
-                onBind(::TextViewHolder) { _, item ->
-                    bind(item.second)
-                }
+            withData<Pair<Any, String>>(R.layout.item_text) {
+                onBind(::TextViewHolder) { index, item -> bind(index, item.second) }
                 onClick {
                     viewModel.onItemClick(Picked(targetRequestCode, item.first, item.second))
+                    dismiss()
                 }
             }
         }
