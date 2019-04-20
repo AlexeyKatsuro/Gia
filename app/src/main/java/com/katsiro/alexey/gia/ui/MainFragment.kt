@@ -13,7 +13,6 @@ import com.katsiro.alexey.gia.databinding.ItemCategoryBinding
 import com.katsiro.alexey.gia.ui.common.adapters.DataBoundAdapter
 import com.katsiro.alexey.gia.utils.extensions.observeValue
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 
 class MainFragment : Fragment() {
@@ -23,7 +22,15 @@ class MainFragment : Fragment() {
     val viewModel: CategoryViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = FragmentMainBinding.inflate(inflater, container, false).apply {
+            lifecycleOwner = viewLifecycleOwner
+
+            buttonAdd.setOnClickListener {
+                val direction = MainFragmentDirections.showCategoryEditorFragment()
+                findNavController().navigate(direction)
+            }
+
+        }
 
         categoryAdapter = DataBoundAdapter(R.layout.item_category,Category::id)
         binding.recyclerView.adapter = categoryAdapter
