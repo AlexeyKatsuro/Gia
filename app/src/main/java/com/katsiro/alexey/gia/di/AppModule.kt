@@ -14,14 +14,18 @@ import com.katsiro.alexey.gia.data.repositories.PurchaseRepository
 import com.katsiro.alexey.gia.data.repositories.PurchaseRepositoryImpl
 import com.katsiro.alexey.gia.ui.CategoryViewModel
 import com.katsiro.alexey.gia.ui.MainViewModel
+import com.katsiro.alexey.gia.ui.editors.CategoryEditorViewModel
+import com.katsiro.alexey.gia.ui.picker.TextPickDialogViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
 
+    viewModel { CategoryEditorViewModel(get()) }
     viewModel { MainViewModel(get(), get()) }
     viewModel { CategoryViewModel(get()) }
+    viewModel { TextPickDialogViewModel() }
 
     single<PurchaseRepository> { PurchaseRepositoryImpl(get()) }
     single<CategoryRepository> { CategoryRepositoryImpl(get()) }

@@ -9,6 +9,10 @@
         <variable
             name="mode"
             type="EditorMode" />
+
+        <variable
+            name="category"
+            type="com.katsiro.alexey.gia.data.entities.Category" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,6 +43,7 @@
                 android:id="@+id/edit_text_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@{category.name}"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,6 +63,9 @@
                 android:id="@+id/edit_text_parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:cursorVisible="false"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 

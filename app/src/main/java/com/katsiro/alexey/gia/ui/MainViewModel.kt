@@ -21,14 +21,14 @@ class MainViewModel(
         get() = _categoriesCount
 
     fun getCategoriesCount(){
-        loadData(_categoriesCount){
-            categoryRepository.getCount()
+        load(call = {categoryRepository.getCount()}){
+            _categoriesCount.value = it
         }
     }
 
     fun getPurchaseCount(){
-        loadData(_purchasesCount){
-            purchaseRepository.getCount()
+        load(call = {purchaseRepository.getCount()}){
+            _purchasesCount.value = it
         }
     }
 }

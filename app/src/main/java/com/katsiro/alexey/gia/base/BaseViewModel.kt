@@ -1,6 +1,5 @@
 package com.katsiro.alexey.gia.base
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,10 +16,12 @@ abstract class BaseViewModel : ViewModel() {
         job.cancel()
     }
 
-    fun <T> loadData(liveData: MutableLiveData<T>, block: suspend () -> T) {
-        scope.launch {
-            val result = block()
-            liveData.value = result
+    protected open fun <T> load(
+        call: suspend () -> T,
+        onDataLoaded: (data: T) -> Unit
+    ): Job {
+        return scope.launch {
+            onDataLoaded(call())
         }
     }
 }

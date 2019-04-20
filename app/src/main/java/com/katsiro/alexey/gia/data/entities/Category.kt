@@ -8,8 +8,8 @@ import kotlinx.android.parcel.Parcelize
 @Entity
 @Parcelize
 data class Category(
-    val name: String,
-    val parentId: Long
+    var name: String,
+    var parentId: Long
 ): Parcelable {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
